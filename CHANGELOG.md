@@ -2,6 +2,56 @@
 
 # Changelog
 
+### [Version 1.31.3](https://github.com/lobehub/lobe-chat/compare/v1.31.2...v1.31.3)
+
+<sup>Released on **2024-11-12**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor `languageModel` & `DEFAULT_LLM_CONFIG` generate.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor `languageModel` & `DEFAULT_LLM_CONFIG` generate, closes [#4649](https://github.com/lobehub/lobe-chat/issues/4649) ([2045131](https://github.com/lobehub/lobe-chat/commit/2045131))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 1.31.2](https://github.com/lobehub/lobe-chat/compare/v1.31.1...v1.31.2)
+
+<sup>Released on **2024-11-12**</sup>
+
+#### 💄 Styles
+
+- **misc**: Update deepseek model.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Update deepseek model, closes [#4674](https://github.com/lobehub/lobe-chat/issues/4674) ([5ab2986](https://github.com/lobehub/lobe-chat/commit/5ab2986))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.31.1](https://github.com/lobehub/lobe-chat/compare/v1.31.0...v1.31.1)
 
 <sup>Released on **2024-11-12**</sup>
