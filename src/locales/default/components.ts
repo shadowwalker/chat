@@ -79,6 +79,7 @@ export default {
       file: '该模型支持上传文件读取与识别',
       functionCall: '该模型支持函数调用（Function Call）',
       reasoning: '该模型支持深度思考',
+      search: '该模型支持联网搜索',
       tokens: '该模型单个会话最多支持 {{tokens}} Tokens',
       vision: '该模型支持视觉识别',
     },
@@ -86,7 +87,9 @@ export default {
   },
   ModelSwitchPanel: {
     emptyModel: '没有启用的模型，请前往设置开启',
-    provider: '提供商',
+    emptyProvider: '没有启用的服务商，请前往设置开启',
+    goToSettings: '前往设置',
+    provider: '服务商',
   },
   OllamaSetupGuide: {
     cors: {

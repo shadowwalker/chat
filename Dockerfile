@@ -67,8 +67,9 @@ ENV NODE_OPTIONS="--max-old-space-size=8192"
 
 WORKDIR /app
 
-COPY package.json ./
+COPY package.json pnpm-workspace.yaml ./
 COPY .npmrc ./
+COPY packages ./packages
 
 RUN \
     # If you want to build docker in China, build with --build-arg USE_CN_MIRROR=true
@@ -86,10 +87,7 @@ RUN \
     # Use pnpm for corepack
     && corepack use $(sed -n 's/.*"packageManager": "\(.*\)".*/\1/p' package.json) \
     # Install the dependencies
-    && pnpm i \
-    # Add sharp dependencies
-    && mkdir -p /deps \
-    && pnpm add sharp --prefix /deps
+    && pnpm i
 
 COPY . .
 
@@ -101,13 +99,9 @@ FROM busybox:latest AS app
 
 COPY --from=base /distroless/ /
 
-COPY --from=builder /app/public /app/public
-
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder /app/.next/standalone /app/
-COPY --from=builder /app/.next/static /app/.next/static
-COPY --from=builder /deps/node_modules/.pnpm /app/node_modules/.pnpm
 
 # Copy server launcher
 COPY --from=builder /app/scripts/serverLauncher/startServer.js /app/startServer.js
@@ -183,6 +177,8 @@ ENV \
     HUNYUAN_API_KEY="" HUNYUAN_MODEL_LIST="" \
     # InternLM
     INTERNLM_API_KEY="" INTERNLM_MODEL_LIST="" \
+    # Jina
+    JINA_API_KEY="" JINA_MODEL_LIST="" JINA_PROXY_URL="" \
     # Minimax
     MINIMAX_API_KEY="" MINIMAX_MODEL_LIST="" \
     # Mistral
@@ -191,6 +187,8 @@ ENV \
     MOONSHOT_API_KEY="" MOONSHOT_MODEL_LIST="" MOONSHOT_PROXY_URL="" \
     # Novita
     NOVITA_API_KEY="" NOVITA_MODEL_LIST="" \
+    # Nvidia NIM
+    NVIDIA_API_KEY="" NVIDIA_MODEL_LIST="" NVIDIA_PROXY_URL="" \
     # Ollama
     ENABLED_OLLAMA="" OLLAMA_MODEL_LIST="" OLLAMA_PROXY_URL="" \
     # OpenAI
@@ -199,8 +197,12 @@ ENV \
     OPENROUTER_API_KEY="" OPENROUTER_MODEL_LIST="" \
     # Perplexity
     PERPLEXITY_API_KEY="" PERPLEXITY_MODEL_LIST="" PERPLEXITY_PROXY_URL="" \
+    # PPIO
+    PPIO_API_KEY="" PPIO_MODEL_LIST="" \
     # Qwen
     QWEN_API_KEY="" QWEN_MODEL_LIST="" QWEN_PROXY_URL="" \
+    # SambaNova
+    SAMBANOVA_API_KEY="" SAMBANOVA_MODEL_LIST="" \
     # SenseNova
     SENSENOVA_API_KEY="" SENSENOVA_MODEL_LIST="" \
     # SiliconCloud
@@ -215,6 +217,8 @@ ENV \
     TOGETHERAI_API_KEY="" TOGETHERAI_MODEL_LIST="" \
     # Upstage
     UPSTAGE_API_KEY="" UPSTAGE_MODEL_LIST="" \
+    # vLLM
+    VLLM_API_KEY="" VLLM_MODEL_LIST="" VLLM_PROXY_URL="" \
     # Wenxin
     WENXIN_API_KEY="" WENXIN_MODEL_LIST="" \
     # xAI
@@ -222,7 +226,9 @@ ENV \
     # 01.AI
     ZEROONE_API_KEY="" ZEROONE_MODEL_LIST="" \
     # Zhipu
-    ZHIPU_API_KEY="" ZHIPU_MODEL_LIST=""
+    ZHIPU_API_KEY="" ZHIPU_MODEL_LIST="" \
+    # Tencent Cloud
+    TENCENT_CLOUD_API_KEY="" TENCENT_CLOUD_MODEL_LIST=""
 
 USER nextjs
 
